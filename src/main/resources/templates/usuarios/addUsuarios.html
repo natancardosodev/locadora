@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template/principal">
+<head>
+<title>Usuários</title>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="col-sm-12 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<h1 class="page-header">Acme</h1>
+			<div class="panel panel-default">
+				<div class="panel-heading" style="padding: 10px;">		
+					<strong>Cadastro de Usuários</strong>
+				</div>
+				<div class="panel-body">
+					
+					<form class="form-horizontal" th:object="${usuario}"
+						th:action="@{/save}" method="POST" style="margin: 10px; margin-top: 1px;">
+						
+						<div class="form-group">
+							<fieldset>
+								<div class="form-group row">
+									<div class="danger"
+										th:if="${#fields.hasAnyErrors()}">
+										<div th:each="detailedError : ${#fields.detailedErrors()}">
+											<span th:text="${detailedError.message}"></span>
+										</div>
+									</div>
+								</div>
+								
+								<input type="hidden" class="form-control input-sm" id="id" th:field="*{id}" readOnly="readonly" />
+								
+								<div class="form-group row">
+									<div class="col-md-6"
+										th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+										<label>Nome</label> <input type="text"
+											class="form-control input-sm" th:field="*{nome}"
+											autofocus="autofocus" placeholder="Informe o nome"
+											maxlength="50" />
+									</div>
+								
+									<div class="col-md-6"
+										th:classappend="${#fields.hasErrors('login')}? 'has-error'">
+										<label>Login</label> <input type="text"
+											class="form-control input-sm" th:field="*{login}"
+											autofocus="autofocus" placeholder="Informe o login"
+											maxlength="50" />
+									</div>
+								</div>
+								
+								<div class="form-group row" >
+									
+									<div class="col-md-6" th:classappend="${#fields.hasErrors('senha')}? 'has-error'">
+										<label>Senha</label> 
+										<input type="password"
+											class="form-control input-sm" th:field="*{senha}"
+											autofocus="autofocus" placeholder="Informe o senha"
+											maxlength="50" />
+									</div>
+								
+									<div class="col-md-6"
+										th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+										<label>E-mail</label>
+										<input class="form-control input-sm" th:field="*{email}"
+											cols="5" rows="5" placeholder="Informe o email"/>
+									</div>
+								</div>
+								
+								
+								<div class="form-group row" >
+									<div class="col-md-12" th:classappend="${#fields.hasErrors('grupos')}? 'has-error'">
+											<h3 align="left"> Grupos do Usuário</h3><br></br>
+											<li th:each="right: ${grupos}">
+											<input type="checkbox"
+												th:field="*{grupos}" th:value="${right.id}"
+												th:text="${right.descricao}" /></li>
+										</div>
+								</div>
+								
+							</fieldset>
+							
+							
+						</div>
+						
+						
+						
+						<div class="form-group row">
+							<button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+							<a th:href="@{/usuarios}" class="btn btn-sm btn-default">Usuários</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="exclusaoGrupo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h2 align="center" class="modal-title" id="exampleModalLabel">Remover Grupo Usuário</h2>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <form>
+			          <div class="modal-body">
+						<span>Tem certeza que deseja excluir o grupo ? </span>
+					  </div>
+			        </form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+			        <button type="button" class="btn btn-primary">Sim</button>
+			      </div>
+			    </div>
+		  	</div>
+	  	</div>
+	</section>
+</body>
+</html>

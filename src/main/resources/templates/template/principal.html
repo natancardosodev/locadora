@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf.extras.springsecurity4">
+ 
+	<div th:include="template/header :: header"></div>
+  <body>
+
+	<div th:include="template/menu_top :: menu_top"></div>
+
+    <div class="container-fluid">
+      <div class="row">
+       	<div th:include="template/menu :: menu"></div>
+       	
+		 <section layout:fragment="content">
+		      <p>Content Page</p>    
+	     </section>
+        
+      </div>
+    </div>
+
+    <div th:include="template/js :: js"></div>
+  </body>
+</html>

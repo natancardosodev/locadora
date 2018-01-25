@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template/principal">
+	<head>
+	<title>Usuários</title>
+	
+		
+	</head>
+<body>
+	<section layout:fragment="content">
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<h1 class="page-header">Locadora</h1>
+				<div class="panel panel-default">
+					
+					<div class="alert alert-success" th:if="${!#strings.isEmpty(removido)}">
+							<button type="button" class="close" data-dismiss="alert"></button>
+							<span th:text="${removido}">Removido</span>
+					</div>
+					
+					<div class="alert alert-success" th:if="${!#strings.isEmpty(sucesso)}">
+							<button type="button" class="close" data-dismiss="alert"></button>
+							<span th:text="${sucesso}">Cadastrado</span>
+					</div>
+					
+					<div class="alert alert-success" th:if="${!#strings.isEmpty(status)}">
+							<button type="button" class="close" data-dismiss="alert"></button>
+							<span th:text="${status}" >Status Usuário</span>
+					</div>
+					<div class="panel-heading">
+						<div class="clearfix">
+							<h5 class="link-panel "><strong> Usuários</strong></h5>
+				   		</div>
+				   	</div>
+									   	
+					<div class="panel-body">
+						<!-- Pesquisa Usuário -->
+						<form method="GET" class="form-horizontal" th:action="@{/usuarios}" th:object="${filtro}">
+							<div class="form-group">
+								<div class="col-sm4">
+									<div class="input-group">
+										<input class="form-control" style="margin-left: 10px;" placeholder="Informe o nome do usuário"
+												autofocus="autofocus" th:field="*{nome}"></input>
+										
+										<span class="input-group-btn">
+											<button type="submit" class="btn btn-pesquisa">
+												<i class="glyphicon glyphicon-search"></i>
+											</button>
+										</span>
+									</div>
+								</div>
+							</div>
+						</form>
+						<div class="table-responsive">
+							<table
+								class="table table-sm table-striped table-hover table-bordered">
+								<thead>
+									<tr>
+										<th>Nome</th>
+										<th>login</th>
+										<th>E-mail</th>
+										<th>Status</th>
+										<th>Ações</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="usuario : ${usuarios}">
+										<td th:text="${usuario.nome}"></td>
+										<td th:text="${usuario.login}"></td>
+										<td th:text="${usuario.email}"></td>
+										<td>
+											<span style="font-size: 12px;" class="label" th:text="${usuario.ativo ? 'Desativado' : 'Ativo'}"
+												 th:classappend="${usuario.ativo ? 'label-warning' : 'label-success'}" >
+											</span>
+										</td>
+										<td class="col-md-3" align="center">
+											<div class="btn-group center-block">
+												<a class="btn btn-xs btn-primary" 
+													th:href="@{/edit/{id}(id=${usuario.id})}">Editar</a> 
+													
+												<a class="delete btn btn-xs btn-danger" data-toggle="modal" data-target="#exclusaoUsuario"
+													th:attr="data-id=${usuario.id}, data-nome=${usuario.nome}" >Excluir</a>
+												
+												<a class="btn btn-xs" style="color: white;"  th:classappend="${usuario.ativo ? 'label-success' : 'label-warning'}"
+													th:href="@{/ativar/{id}/(id=${usuario.id})}">
+													
+													<span style="font-size: 12px;"  th:text="${usuario.ativo ? 'Ativar' : 'Desativar'}"
+														  th:classappend="${usuario.ativo ? 'label-success' : 'label-warning'}">
+													</span>	
+												</a>
+												
+											</div>
+										</td>
+									</tr>
+								
+									<tr>
+										<td colspan="6" th:if="${#lists.isEmpty(usuarios)}">Nenhum usuário cadastrado!</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div>
+						<div th:include="template/modalExclusaoUsuario"></div>
+					</div>
+					<div class="panel-footer">
+						<a class="btn btn-sm btn-success" th:href="@{/add/}">Adicionar</a>
+					</div>
+				</div>
+			</div>
+			
+	</section>
+</body>
+</html>
