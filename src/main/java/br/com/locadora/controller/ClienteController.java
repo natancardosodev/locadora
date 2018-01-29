@@ -40,8 +40,6 @@ public class ClienteController {
 	@Autowired
 	private GrupoService grupoService;
 	
-	
-	
 	@GetMapping("/clientes")
 	public ModelAndView findAll(@ModelAttribute("filtro") FiltroUsuario filtro) {		
 		ModelAndView mv = new ModelAndView(LISTAR_CLIENTES);
@@ -70,7 +68,6 @@ public class ClienteController {
 		attributes.addFlashAttribute("sucesso", "Cliente removido com sucesso!");
 		return mvRedirect;
 	}
-	
 
 	@PostMapping("/saveClientes")
 	public ModelAndView save(@Valid Cliente cliente, BindingResult result, RedirectAttributes attributes) {
@@ -85,18 +82,5 @@ public class ClienteController {
 		attributes.addFlashAttribute("sucesso", "Cliente adicionado com sucesso!");
 		return mvRedirect;
 	}
-	
-	
-//	@GetMapping("/ativar/{id}")
-//	public ModelAndView ativar(@PathVariable("id") Long id, RedirectAttributes attributes) {
-//		ModelAndView mvRedirect = new  ModelAndView("redirect:/usuarios");
-//		Cliente u = this.clienteService.findOne(id);
-//		if(u.isAtivo()) {
-//			this.clienteService.ativaDesativaUsuario(this.clienteService.findOne(id));
-//		}else {
-//			this.clienteService.ativaDesativaUsuario(this.clienteService.findOne(id));
-//		}
-//		return mvRedirect;
-//	}
 	
 }
