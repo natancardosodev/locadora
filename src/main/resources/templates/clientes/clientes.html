@@ -66,14 +66,14 @@
 								</thead>
 								<tbody>
 									<tr th:each="cliente : ${clientes}">
-										<td th:text="${clientes.nome}"></td>
-										<td th:text="${clientes.email}"></td>
-										<td th:text="${clientes.telefone}"></td>
-										<td th:text="${clientes.cpf}"></td>
+										<td th:text="${cliente.nome}"></td>
+										<td th:text="${cliente.email}"></td>
+										<td th:text="${cliente.telefone}"></td>
+										<td th:text="${cliente.cpf}"></td>
 										<td class="col-md-3" align="center">
 											<div class="btn-group center-block">
 												<a class="btn btn-xs btn-primary" 
-													th:href="@{/edit/{id}(id=${cliente.id})}">Editar</a> 
+													th:href="@{/editClientes/{id}(id=${cliente.id})}">Editar</a> 
 													
 												<a class="delete btn btn-xs btn-danger" data-toggle="modal" data-target="#exclusaoCliente"
 													th:attr="data-id=${cliente.id}, data-nome=${cliente.nome}" >Excluir</a>
@@ -93,7 +93,7 @@
 						<div th:include="template/modalExclusaoCliente"></div>
 					</div>
 					<div class="panel-footer">
-						<a class="btn btn-sm btn-success" th:href="@{/addCliente/}">Adicionar</a>
+						<a class="btn btn-sm btn-success" th:href="@{/addClientes/}">Adicionar</a>
 					</div>
 				</div>
 			</div>

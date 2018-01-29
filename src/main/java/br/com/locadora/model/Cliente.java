@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -39,11 +40,13 @@ public class Cliente implements Serializable {
 	private String email;
 
 	@Column(nullable = false, length = 20)
-	@NotBlank(message = "Telefone é informação obrigatória.")
+//	@NotBlank(message = "Telefone é informação obrigatória.")
+	@NotNull
 	private Long telefone;
 	
 	@Column(nullable = false, length = 20)
-	@NotBlank(message = "CPF é informação obrigatória.")
+//	@NotBlank(message = "CPF é informação obrigatória.")
+	@NotNull
 	private Long cpf;
 
 	@ManyToMany

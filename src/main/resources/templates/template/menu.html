@@ -9,6 +9,7 @@
 		<ul class="nav nav-sidebar">
 			<li class="active"><a href="#">Menu Principal<span class="sr-only">(current)</span></a></li>
 			<li sec:authorize="hasRole('MASTER')"><a th:href="@{/usuarios}">Usuários</a></li>
+			<li sec:authorize="hasRole('VISITANTE')"><a th:href="@{/clientes}">Clientes</a></li>
 		</ul>
 	</div>
 </div>

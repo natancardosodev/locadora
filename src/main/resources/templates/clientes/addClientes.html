@@ -4,7 +4,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="template/principal">
 <head>
-<title>Usuários</title>
+<title>Clientes</title>
 </head>
 <body>
 	<section layout:fragment="content">
@@ -12,12 +12,12 @@
 			<h1 class="page-header">Acme</h1>
 			<div class="panel panel-default">
 				<div class="panel-heading" style="padding: 10px;">		
-					<strong>Cadastro de Usuários</strong>
+					<strong>Cadastro de Clientes</strong>
 				</div>
 				<div class="panel-body">
 					
-					<form class="form-horizontal" th:object="${usuario}"
-						th:action="@{/save}" method="POST" style="margin: 10px; margin-top: 1px;">
+					<form class="form-horizontal" th:object="${cliente}"
+						th:action="@{/saveClientes}" method="POST" style="margin: 10px; margin-top: 1px;">
 						
 						<div class="form-group">
 							<fieldset>
@@ -42,29 +42,30 @@
 									</div>
 								
 									<div class="col-md-6"
-										th:classappend="${#fields.hasErrors('login')}? 'has-error'">
-										<label>Login</label> <input type="text"
-											class="form-control input-sm" th:field="*{login}"
-											autofocus="autofocus" placeholder="Informe o login"
+										th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+										<label>E-mail</label> <input type="text"
+											class="form-control input-sm" th:field="*{email}"
+											autofocus="autofocus" placeholder="Informe o e-mail"
 											maxlength="50" />
 									</div>
 								</div>
 								
 								<div class="form-group row" >
 									
-									<div class="col-md-6" th:classappend="${#fields.hasErrors('senha')}? 'has-error'">
-										<label>Senha</label> 
-										<input type="password"
-											class="form-control input-sm" th:field="*{senha}"
-											autofocus="autofocus" placeholder="Informe o senha"
+									<div class="col-md-6" th:classappend="${#fields.hasErrors('telefone')}? 'has-error'">
+										<label>Telefone</label> 
+										<input type="text"
+											class="form-control input-sm" th:field="*{telefone}"
+											autofocus="autofocus" placeholder="Informe o telefone"
 											maxlength="50" />
 									</div>
 								
-									<div class="col-md-6"
-										th:classappend="${#fields.hasErrors('email')}? 'has-error'">
-										<label>E-mail</label>
-										<input class="form-control input-sm" th:field="*{email}"
-											cols="5" rows="5" placeholder="Informe o email"/>
+									<div class="col-md-6" th:classappend="${#fields.hasErrors('cpf')}? 'has-error'">
+										<label>CPF</label>
+										<input type="text"
+											class="form-control input-sm" th:field="*{cpf}"
+											autofocus="autofocus" placeholder="Informe o CPF"
+											maxlength="50" />
 									</div>
 								</div>
 								
@@ -88,7 +89,7 @@
 						
 						<div class="form-group row">
 							<button type="submit" class="btn btn-sm btn-primary">Salvar</button>
-							<a th:href="@{/usuarios}" class="btn btn-sm btn-default">Usuários</a>
+							<a th:href="@{/clientes}" class="btn btn-sm btn-default">Clientes</a>
 						</div>
 					</form>
 				</div>

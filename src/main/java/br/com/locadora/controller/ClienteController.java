@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.locadora.model.Cliente;
 import br.com.locadora.repository.filtros.FiltroUsuario;
 import br.com.locadora.service.ClienteService;
+import br.com.locadora.service.GrupoService;
 
 
 /**
@@ -36,8 +37,8 @@ public class ClienteController {
 	@Autowired
 	private ClienteService clienteService;
 	
-//	@Autowired
-//	private GrupoService grupoService;
+	@Autowired
+	private GrupoService grupoService;
 	
 	
 	
@@ -49,29 +50,29 @@ public class ClienteController {
 		return mv;
 	}
 
-	@GetMapping("/addCliente")
+	@GetMapping("/addClientes")
 	public ModelAndView add(Cliente cliente) {
 		ModelAndView mv = new ModelAndView(CADASTRAR_CLIENTES);
-		mv.addObject("usuario", cliente);
-//		mv.addObject("grupos", this.grupoService.listAll());
+		mv.addObject("cliente", cliente);
+		mv.addObject("grupos", this.grupoService.listAll());
 		return mv;
 	}
 
-	@GetMapping("/editCliente/{id}")
+	@GetMapping("/editClientes/{id}")
 	public ModelAndView edit(@PathVariable("id") Long id) {
 		return add(clienteService.findOne(id));
 	}
 
-	@GetMapping("/deleteCliente/{id}")
+	@GetMapping("/deleteClientes/{id}")
 	public ModelAndView delete(@PathVariable("id") Long id, RedirectAttributes attributes) {
-		ModelAndView mvRedirect = new  ModelAndView("redirect:/clientes");
+		ModelAndView mvRedirect = new ModelAndView("redirect:/clientes");
 		clienteService.remove(id);
 		attributes.addFlashAttribute("sucesso", "Cliente removido com sucesso!");
 		return mvRedirect;
 	}
 	
 
-	@PostMapping("/saveCliente")
+	@PostMapping("/saveClientes")
 	public ModelAndView save(@Valid Cliente cliente, BindingResult result, RedirectAttributes attributes) {
 		ModelAndView mv = new  ModelAndView(CADASTRAR_CLIENTES);
 		

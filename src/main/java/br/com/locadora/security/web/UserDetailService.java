@@ -43,7 +43,7 @@ public class UserDetailService implements UserDetailsService {
 		Usuario usuario = usuarioService.findByLogin(username);
 
 		if (usuario == null || usuario.isAtivo()) {
-			throw new UsernameNotFoundException("Usuário Não encontrado!");
+			throw new UsernameNotFoundException("Usuário não encontrado!");
 		}
 
 		return new UsuarioSistema(usuario.getNome(), usuario.getLogin(), usuario.getSenha(), authorities(usuario));
